@@ -1,20 +1,28 @@
 <template>
   <div class="container">
     <Header title="Track" />
+    <Tasks @delete-task="deleteTask"  :tasks='tasks' />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
+import Tasks from '@/components/Tasks'
 
 export default {
   name: "App",
   components: {
-    Header
+    Header,
+    Tasks,
   },
   data(){
     return{
       tasks: []
+    }
+  },
+  methods: {
+    deleteTask(id){
+      console.log('task', id)
     }
   },
   created(){
@@ -35,7 +43,7 @@ export default {
         id:3,
         text: 'Chelsea was created',
         day: 'march 1st march 1919 at 3:30pm',
-        reminder: true
+        reminder: false
       },
     ]
   }
