@@ -2,7 +2,7 @@
   <div class="container">
     <Header @toggle-add-task="toggleAddTask" title="Track" :showAddTask="showAddTask" />
     <div v-if="showAddTask">
-      <AddTask />
+      <AddTask @add-task="addTask" />
     </div>
    
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask"  :tasks='tasks' />
@@ -31,6 +31,9 @@ export default {
   methods: {
     toggleAddTask() {
       this.showAddTask = !this.showAddTask
+    },
+    addTask(task){
+      this.tasks = [...this.tasks,task]
     },
     deleteTask(id){
       if(confirm("Do you want ?")){
