@@ -1,26 +1,37 @@
 <template>
   <div class="container">
-    <Header title="Track" />
+    <Header @toggle-add-task="toggleAddTask" title="Track" :showAddTask="showAddTask" />
+    <div v-if="showAddTask">
+      <AddTask />
+    </div>
+   
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask"  :tasks='tasks' />
+    
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header'
 import Tasks from '@/components/Tasks'
+import AddTask from '@/components/AddTask'
 
 export default {
   name: "App",
   components: {
     Header,
     Tasks,
+    AddTask,
   },
   data(){
     return{
-      tasks: []
+      tasks: [],
+      showAddTask: false
     }
   },
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
     deleteTask(id){
       if(confirm("Do you want ?")){
         this.tasks = this.tasks.filter((task) => task.id !== id)
